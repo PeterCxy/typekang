@@ -1,0 +1,9 @@
+node_modules
+lib
+yarn.lock
+*.swp
+#data/*
+data/css/*
+!data/css/PLACEHOLDER
+data/font/*
+!data/font/PLACEHOLDER
