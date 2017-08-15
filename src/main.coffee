@@ -11,6 +11,7 @@ main = ->
   app = express()
   app.use rawBody
   app.use '/font/css', express.static('data/css')
+  app.use '/font/js', express.static('data/js')
   app.post '/font/generate/:name/:id', generateFont
   app.listen 4567, =>
     console.log 'Listening on port 4567'
@@ -25,7 +26,11 @@ generateFont = (req, res) ->
   else if not await existsAsync fontPath
     res.sendStatus 404
   else
-    await mkdirAsync dirPath
+    try
+      await mkdirAsync dirPath
+    catch err
+      # DO NOTHING
+    #console.log req.rawBody
     fontmin = new Fontmin()
       .src fontPath
       .use Fontmin.glyph text: req.rawBody

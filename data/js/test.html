@@ -1,0 +1,26 @@
+<html>
+<head>
+  <title>TypeKang Test</title>
+  <script src="./md5.js"></script>
+  <script src="./typekang.js"></script>
+</head>
+<body>
+  <p>我能吞下玻璃而不伤身体。</p>
+  <p>I can eat glass, it doesn't hurt me.</p>
+  <p>私は硝子を食べられます。私を傷付けません。</p>
+  <p id='bold'>粗体测试。This is bold text.</p>
+  <script>
+    renderBody('', 'regular', function () {
+      var eBold = document.getElementById('bold')
+      renderFont('', 'bold', eBold.innerText, function (err, font) {
+        if (err) {
+          return
+        }
+        var css = document.createElement('style')
+        css.innerHTML += "#bold { font-family: " + font + "; }"
+        document.body.appendChild(css)
+      })
+    })
+  </script>
+</body>
+</html>
