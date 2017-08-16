@@ -7,3 +7,5 @@ data/css/*
 !data/css/PLACEHOLDER
 data/font/*
 !data/font/PLACEHOLDER
+data/js/typekang.js
+data/js/typekang.min.js
