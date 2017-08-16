@@ -1,8 +1,7 @@
 <html>
 <head>
   <title>TypeKang Test</title>
-  <script src="./md5.js"></script>
-  <script src="./typekang.js"></script>
+  <script src="./typekang.min.js"></script>
 </head>
 <body>
   <p>我能吞下玻璃而不伤身体。</p>
@@ -12,13 +11,8 @@
   <script>
     renderBody('', 'regular', function () {
       var eBold = document.getElementById('bold')
-      renderFont('', 'bold', eBold.innerText, function (err, font) {
-        if (err) {
-          return
-        }
-        var css = document.createElement('style')
-        css.innerHTML += "#bold { font-family: " + font + "; }"
-        document.body.appendChild(css)
+      renderElement('', 'bold', eBold, function (err, font) {
+         // Done
       })
     })
   </script>

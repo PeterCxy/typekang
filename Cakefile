@@ -12,8 +12,16 @@ sharedCallback = (callback) -> (err) ->
   throw err if err
   callback() if callback? and callback instanceof Function
 
-build = (callback) ->
+buildBackend = (callback) ->
   execLive 'node_modules/.bin/coffee -o mid -c src && node_modules/.bin/babel -d lib mid && rm -rf mid', callback
+
+buildApi = (callback) ->
+  execLive 'node_modules/.bin/coffee -b --print api/typekang.coffee | node_modules/.bin/babel --presets env --no-babelrc > data/js/typekang.js', =>
+    execLive 'cat api/md5.js >> data/js/typekang.js', =>
+      execLive 'node_modules/.bin/uglifyjs data/js/typekang.js -c -o data/js/typekang.min.js', callback
+
+build = (callback) ->
+  buildBackend => buildApi callback
 
 start = (callback) ->
   build => execLive 'yarn start', callback
