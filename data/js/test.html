@@ -7,14 +7,26 @@
   <p>我能吞下玻璃而不伤身体。</p>
   <p>I can eat glass, it doesn't hurt me.</p>
   <p>私は硝子を食べられます。私を傷付けません。</p>
-  <p id='bold'>粗体测试。This is bold text.</p>
+  <p id='bold'>東京特許許可局 とうきょうとっきょきょかきょく 东京特许许可局 Tokyo Tokkyo Kyoka Kyoku</p>
+  <p class='medium'>敏捷的棕毛狐狸跃过懒惰的狗。</p>
+  <p class='medium'>The quick brown fox jumps over the lazy dog.</p>
+  <button onClick="moreFonts()" style="font-family: inherit;">More Tests</button>
   <script>
-    renderBody('', 'regular', function () {
+    renderBody('', 'regular')
+
+    var finished = false
+    function moreFonts() {
+      if (finished)
+        return
+      finished = true
       var eBold = document.getElementById('bold')
-      renderElement('', 'bold', eBold, function (err, font) {
-         // Done
+      renderElement('', 'bold', eBold, function () {
+         var eMedium = document.getElementsByClassName('medium')
+         renderElements('', 'medium', eMedium, function () {
+           // OK
+         })
       })
-    })
+    }
   </script>
 </body>
 </html>

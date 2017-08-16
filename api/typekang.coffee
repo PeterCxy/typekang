@@ -12,7 +12,18 @@ renderElement = (baseURL, name, element, callback) ->
   renderFont baseURL, name, element.innerText, (err, fontName) ->
     callback err if err? and callback?
     element.style.fontFamily = fontName
-    callback null, fontName
+    callback null, fontName if callback?
+
+# Apply font of {name} to an array of elements
+renderElements = (baseURL, name, elements, callback) ->
+  text = ''
+  for e in elements
+    text += e.innerText
+  renderFont baseURL, name, text, (err, fontName) ->
+    callback err if err? and callback?
+    for e in elements
+      e.style.fontFamily = fontName
+    callback null, fontName if callback?
 
 # Generate font subset of {name} with {content} and return the resulting font-family to callback
 renderFont = (baseURL, name, content, callback) ->
